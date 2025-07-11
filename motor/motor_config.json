@@ -1,0 +1,33 @@
+{
+  "motor_controller": {
+    "type": "motozero",
+    "comment": "Options: motozero, l298, camjam. Only the selected type will be imported."
+  },
+  "mqtt": {
+    "broker": "localhost",
+    "port": 1883,
+    "topics": {
+      "command": "hov/motor/command",
+      "status": "hov/motor/status"
+    },
+    "heartbeat_timeout_seconds": 10
+  },
+  "motor_settings": {
+    "default_speed_percent": 50,
+    "max_speed_percent": 100,
+    "turn_speed_percent": 40,
+    "acceleration_enabled": false,
+    "acceleration_step": 5
+  },
+  "calibration": {
+    "left_motor_factor": 1.0,
+    "right_motor_factor": 1.0,
+    "turn_adjustment": 1.0,
+    "comment": "Adjust these values to compensate for motor differences"
+  },
+  "safety": {
+    "emergency_stop_enabled": true,
+    "heartbeat_monitoring": true,
+    "auto_stop_on_disconnect": true
+  }
+}

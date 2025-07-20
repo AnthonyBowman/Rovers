@@ -1,7 +1,7 @@
 {
   "motor_controller": {
     "type": "motozero",
-    "comment": "Options: motozero, l298, camjam. Only the selected type will be imported."
+    "comment": "Options: motozero, l298, camjam. Files: hal/motozero.py, hal/l298.py, hal/camjam.py"
   },
   "mqtt": {
     "broker": "localhost",

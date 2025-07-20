@@ -23,9 +23,9 @@ def create_motor_controller(controller_type):
     
     # Map controller types to their module and class names
     controller_map = {
-        "motozero": ("hal_motozero", "MotoZeroController"),
-        "l298": ("hal_l298", "L298Controller"),
-        "camjam": ("hal_camjam", "CamJamController")
+        "motozero": ("motozero", "MotoZeroController"),
+        "l298": ("l298", "L298Controller"),
+        "camjam": ("camjam", "CamJamController")
     }
     
     if controller_type not in controller_map:

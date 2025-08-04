@@ -73,17 +73,11 @@ install_mqtt() {
     sudo apt install -y mosquitto mosquitto-clients
     
     # Install Python MQTT client
-    pip3 install paho-mqtt
+    sudo apt install -y python3-paho-mqtt
     
     # Configure Mosquitto to allow anonymous connections
-    log_info "Configuring MQTT broker..."
-    sudo tee -a /etc/mosquitto/mosquitto.conf <<EOF
-
-# Custom configuration for rover system
-listener 1883
-allow_anonymous true
-EOF
-    
+    #log_info "Configuring MQTT broker..."
+       
     # Enable and start Mosquitto service
     sudo systemctl enable mosquitto
     sudo systemctl restart mosquitto
@@ -98,21 +92,24 @@ install_rover_deps() {
     # GPIO libraries for Raspberry Pi
     if command -v gpio >/dev/null 2>&1; then
         log_info "Raspberry Pi detected, installing GPIO libraries..."
-        pip3 install RPi.GPIO gpiozero
+        sudo apt install -y python3-rpi.gpio python3-gpiozero
+        # pip3 install RPi.GPIO gpiozero
     fi
     
-    # Camera libraries
-    sudo apt install -y python3-picamera
-    pip3 install picamera
+    # Camera libraries (new libcamera system)
+    sudo apt install -y python3-picamera2 python3-libcamera python3-kms++
+    sudo apt install -y python3-prctl libatlas-base-dev ffmpeg
     
     # OpenCV for computer vision
     sudo apt install -y python3-opencv
     
     # Additional sensor libraries
-    pip3 install smbus2
+    sudo apt install -y python3-smbus2
+    #pip3 install smbus2
     
     # PySerial for serial communication
-    pip3 install pyserial
+    sudo apt install -y python3-serial
+    #pip3 install pyserial
     
     log_success "Rover dependencies installed"
 }
@@ -131,11 +128,11 @@ install_controller_deps() {
     sudo apt install -y nmap arp-scan
     
     # Optional: Kivy if user wants alternative GUI frameworks
-    read -p "Install Kivy GUI framework as alternative? (y/n): " install_kivy
-    if [[ "$install_kivy" =~ ^[Yy]$ ]]; then
-        pip3 install kivy kivymd
-        log_success "Kivy installed as optional GUI framework"
-    fi
+    #read -p "Install Kivy GUI framework as alternative? (y/n): " install_kivy
+    #if [[ "$install_kivy" =~ ^[Yy]$ ]]; then
+    #    pip3 install kivy kivymd
+    #    log_success "Kivy installed as optional GUI framework"
+    #fi
     
     log_success "Controller dependencies installed"
 }
